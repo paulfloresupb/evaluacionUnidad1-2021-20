@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include "student.h"
-
 
 /* main es el nombre del archivo ejecutable.
 |  pathInFileName y pathOutFileName son dos cadenas con el path absoluto o 
@@ -13,7 +13,7 @@ int main(int argc, char *argv[]){
     FILE *fileIn = NULL;
     FILE *fileOut = NULL;
 
-    for(u_int8_t i = 0; i < argc; i++){
+    for(uint8_t i = 0; i < argc; i++){
         if (i == 1){
             fileIn = fopen(argv[1],"r");
             if (fileIn == NULL){
@@ -30,8 +30,8 @@ int main(int argc, char *argv[]){
             }
         }
     }
-    feature1(fileIn,fileOut);
-    feature2(fileIn,fileOut);
+feature1(fileIn,fileOut);
+feature2(fileIn,fileOut);
 
     return EXIT_SUCCESS;
 }
