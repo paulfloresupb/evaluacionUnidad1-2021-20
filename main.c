@@ -32,6 +32,7 @@ int main(int argc, char *argv[]){
     }
 feature1(fileIn,fileOut);
 feature2(fileIn,fileOut);
+feature3(fileIn,fileOut);
 
     return EXIT_SUCCESS;
 }
