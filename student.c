@@ -74,6 +74,7 @@ void feature3(FILE * fileIn, FILE *fileOut){
     uint8_t data = 0;
     uint8_t i = 0;
     uint8_t suma = 0;
+    
     char *buffer = create_array(size);
     
     while((data = fgetc(fileIn)) != EOF){
@@ -97,6 +98,47 @@ void feature3(FILE * fileIn, FILE *fileOut){
     }
     fprintf(fileOut, "\n");
     fprintf(fileOut, "%d",suma);
+    destroy_array(buffer);
+}
+
+void feature4(FILE * fileIn, FILE *fileOut){
+/* feature4: lee el arreglo de enteros de la cuarta línea 
+del archivo de entrada así como la operación especificada 
+luego del arreglo, separada por un espacio.
+*/
+    uint8_t size = 160;
+    uint8_t lfcount = 0;
+    uint8_t data = 0;
+    uint8_t i = 0;
+    uint8_t suma = 0;
+    uint8_t contador = 0;
+    uint8_t media = 0.0;
+
+    char *buffer = create_array(size);
+    
+    while((data = fgetc(fileIn)) != EOF){
+        if(data == 10) lfcount++; 
+        if(lfcount >= 1) break; 
+        buffer[i] = data;
+        i++;
+    }
+
+    for(uint8_t k=0; k<size;k++){
+        if(buffer[k] > 58 || buffer[k] < 32) buffer[k] = 0;
+    }
+    char *token;
+    token = strtok(buffer, " ");
+    if(token == NULL) EXIT_FAILURE;
+    suma += atoi(token);
+    while(token != NULL){
+        token = strtok(NULL, " ");
+        if(token==NULL) break;
+        suma += atoi(token);
+        contador = contador + 1;
+    }
+    media = suma/contador;
+    fprintf(fileOut, "\n");
+    fprintf(fileOut, "%d",media);
     destroy_array(buffer);
 }
 
