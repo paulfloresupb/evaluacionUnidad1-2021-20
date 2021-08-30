@@ -112,7 +112,7 @@ luego del arreglo, separada por un espacio.
     uint8_t i = 0;
     uint8_t suma = 0;
     uint8_t contador = 0;
-    uint8_t media = 0.0;
+    float media = 0.0;
 
     char *buffer = create_array(size);
     
@@ -138,7 +138,7 @@ luego del arreglo, separada por un espacio.
     }
     media = suma/contador;
     fprintf(fileOut, "\n");
-    fprintf(fileOut, "%d",media);
+    fprintf(fileOut, "%.2f",media);
     destroy_array(buffer);
 }
 
