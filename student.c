@@ -1,10 +1,11 @@
 #include <stdlib.h>
 #include <stdint.h>
+#include <string.h>
 #include "student.h"
 
 void feature1(FILE *fileIn, FILE *fileOut);
 int feature2(FILE *fileIn, FILE *fileOut);
-int feature3(FILE *fileIn, FILE *fileOut);
+void feature3(FILE *fileIn, FILE *fileOut);
 
 char *create_array(int);
 void destroy_array(char *);
@@ -63,6 +64,41 @@ int feature2(FILE * fileIn, FILE *fileOut){
 
 }
 
+void feature3(FILE * fileIn, FILE *fileOut){
+/* feature3: lee el arreglo de enteros de la tercera línea del 
+   archivo de entrada, calcula la suma y almacena el resultado en 
+   la tercera línea del archivo de salida.
+*/
+    uint8_t size = 160;
+    uint8_t lfcount = 0;
+    uint8_t data = 0;
+    uint8_t i = 0;
+    uint8_t suma = 0;
+    char *buffer = create_array(size);
+    
+    while((data = fgetc(fileIn)) != EOF){
+        if(data == 10) lfcount++; 
+        if(lfcount >= 1) break; 
+        buffer[i] = data;
+        i++;
+    }
+
+    for(uint8_t k=0; k<size;k++){
+        if(buffer[k] > 58 || buffer[k] < 32) buffer[k] = 0;
+    }
+    char *token;
+    token = strtok(buffer, " ");
+    if(token == NULL) EXIT_FAILURE;
+    suma += atoi(token);
+    while(token != NULL){
+        token = strtok(NULL, " ");
+        if(token==NULL) break;
+        suma += atoi(token);
+    }
+    fprintf(fileOut, "\n");
+    fprintf(fileOut, "%d",suma);
+    destroy_array(buffer);
+}
 
 char *create_array(int size){
     return (char *) malloc(sizeof(int)* size);
